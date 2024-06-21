@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import "theme";
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+.example-spacer {
+    flex: 1 1 auto;
+  }
+.flex{
+  display: inline-flex;
+
+  .mat-card{
+    display: inline-flex;
+  }
+}
+// .logo{
+//     width: 200px !important;
+//     height: 40px !important;
+//     margin-left: 50px;
+//   }
+  // .mdc-list-item__primary-text{
+  //   color: $light-warning !important;
+  // }
+  .mdc-list-item__primary-text:hover{
+    color: whitesmoke !important;
+    font-weight: bold;
+  }
+.example-icon{
+  color: whitesmoke !important;
+}
+
+

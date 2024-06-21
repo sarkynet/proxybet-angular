@@ -1,0 +1,264 @@
+@use 'sass:map';
+
+
+$dark-primary-text: rgba(#0f161d, 0.87);
+$dark-secondary-text: rgba(#0f161d, 0.87);
+$dark-disabled-text: rgba(#0f161d, 0.38);
+$dark-dividers: rgba(#0f161d, 0.12);
+$dark-focused: rgba(#0f161d, 0.12);
+$light-primary-text: white;
+$light-secondary-text: rgba(white, 0.7);
+$light-disabled-text: rgba(white, 0.5);
+$light-dividers: rgba(white, 0.12);
+$light-focused: rgba(white, 0.12);
+
+$indigo-palette: (
+  50: #e8eaf6,
+  100: #d8dcf7,
+  200: #bcc6fa,
+  300: #93a4f8,
+  400: #6076f3,
+  500: #2a46fd,
+  600: #122ac7,
+  700: #011594,
+  800: #020c5c,
+  900: #010427,
+  A100: #8c9eff,
+  A200: #2e2e3d,
+  A400: #444453,
+  A700: #304ffe,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Alias for alternate spelling.
+// $blue-gray-palette: $blue-grey-palette;
+
+$blue-grey-palette: (
+  50: #eceff1,
+  100: #d1d6da,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #3b4c63,
+  500: #243347,
+  600: #445963,
+  700: #323e4e,
+  800: #222c38,
+  900: #0f161d,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Alias for alternate spelling.
+$blue-gray-palette: $blue-grey-palette;
+
+
+$orange-palette: (
+  50: #fff3e0,
+  100: #ffe0b2,
+  200: #ffcc80,
+  300: #ffb74d,
+  400: #ffa726,
+  500: #ff9800,
+  600: #fb8c00,
+  700: #f57c00,
+  800: #ef6c00,
+  900: #e65100,
+  A100: #ffd180,
+  A200: #ffab40,
+  A400: #ff9100,
+  A700: #ff6d00,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: rgb(0, 0, 0),
+  )
+);
+
+$amber-palette: (
+  50: #fff8e1,
+  100: #ffecb3,
+  200: #ffe082,
+  300: #ffd54f,
+  400: #ffca28,
+  500: #ffc107,
+  600: #ffb300,
+  700: #ffa000,
+  800: #ff8f00,
+  900: #ff6f00,
+  A100: #ffe57f,
+  A200: #ffd740,
+  A400: #ffc400,
+  A700: #ffab00,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $dark-primary-text,
+    900: $dark-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$light-green-palette: (
+  50: #f1f8e9,
+  100: #dcedc8,
+  200: #c5e1a5,
+  300: #aed581,
+  400: #9ccc65,
+  500: #8bc34a,
+  600: #7cb342,
+  700: #689f38,
+  800: #558b2f,
+  900: #33691e,
+  A100: #ccff90,
+  A200: #b2ff59,
+  A400: #76ff03,
+  A700: #64dd17,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+// Background palette for light themes.
+$light-theme-background-palette: (
+  status-bar: map.get($blue-grey-palette, 300),
+  app-bar:    map.get($blue-grey-palette, 100),
+  background: map.get($blue-grey-palette, 100),
+  hover:      rgba(rgb(31, 37, 44), 0.04), // TODO(kara): check style with Material Design UX
+  card:       white,
+  dialog:     white,
+  disabled-button: map.get($blue-grey-palette, 900),
+  raised-button: white,
+  focused-button: $dark-focused,
+  selected-button: map.get($blue-grey-palette, 300),
+  selected-disabled-button: map.get($blue-grey-palette, 400),
+  disabled-button-toggle: map.get($blue-grey-palette, 200),
+  unselected-chip: map.get($blue-grey-palette, 300),
+  disabled-list-option: map.get($blue-grey-palette, 200),
+  tooltip: map.get($blue-grey-palette, 700),
+  sidenav: map.get($blue-grey-palette, 400),
+);
+
+// Background palette for dark themes.
+$dark-theme-background-palette: (
+  status-bar: map.get($blue-grey-palette, 900),
+  app-bar:    map.get($blue-grey-palette, 700),
+  background: map.get($blue-grey-palette, 900),
+  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card:       map.get($blue-grey-palette, 800),
+  dialog:     map.get($blue-grey-palette, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map.get($blue-grey-palette, 800),
+  focused-button: $light-focused,
+  selected-button: map.get($blue-grey-palette, 900),
+  selected-disabled-button: map.get($blue-grey-palette, 800),
+  disabled-button-toggle: map.get($blue-grey-palette, 900),
+  unselected-chip: map.get($blue-grey-palette, 700),
+  disabled-list-option: rgba(white, 0.12),
+  tooltip: map.get($blue-grey-palette, 700),
+  sidenav: map.get($blue-grey-palette, 700),
+);
+
+// Foreground palette for light themes.
+$light-theme-foreground-palette: (
+  base:              map.get($blue-grey-palette, 900),
+  divider:           $dark-dividers,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   map.get($blue-grey-palette, 900),
+  disabled-text:     $dark-disabled-text,
+  elevation:         map.get($blue-grey-palette, 900),
+  hint-text:         $dark-disabled-text,
+  secondary-text:    $dark-secondary-text,
+  icon:              map.get($blue-grey-palette, 900),
+  icons:             map.get($blue-grey-palette, 900),
+  text:              map.get($blue-grey-palette, 900),
+  slider-min:        map.get($blue-grey-palette, 900),
+  slider-off:        map.get($blue-grey-palette, 900),
+  slider-off-active: map.get($blue-grey-palette, 900),
+);
+
+// Foreground palette for dark themes.
+$dark-theme-foreground-palette: (
+  base:              white,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         map.get($blue-grey-palette, 900),
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-secondary-text,
+  icon:              white,
+  icons:             white,
+  text:              white,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+

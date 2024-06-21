@@ -1,0 +1,48 @@
+<div  [ngClass]="{'darkMode': isDark, 'lightMode': !isDark}">
+  <mat-toolbar color="primary" class="header">
+    <!-- <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button> -->
+    <button mat-icon-button (click)="checkMobible()"><mat-icon>menu</mat-icon></button>
+    <img class="logo" src="assets/images/sarkynet_logo_white.png" alt="" srcset="" width="35" height="40">
+    <h1 class="example-app-name">ProxyBet</h1>
+    <span class="example-spacer"></span>
+    <button mat-icon-button routerLink="/page1" routerLinkActive="selected no-border txt-bold" class="py-2 pr-5">
+      <mat-icon class="mr-2">share</mat-icon></button>
+    <mat-divider></mat-divider>
+    <button mat-icon-button routerLink="/page2" routerLinkActive="selected no-border txt-bold" class="py-2 pr-5">
+      <mat-icon class="mr-2">notifications</mat-icon></button>
+    <mat-divider></mat-divider>
+    <button mat-icon-button routerLink="/page1" routerLinkActive="selected no-border txt-bold" class="py-2 pr-5">
+      <mat-icon class="mr-2">person</mat-icon></button>
+    <mat-divider></mat-divider>
+    <mat-slide-toggle class="example-margin" (ngModel)="isDark" (change)='toggleTheme()'></mat-slide-toggle>
+</mat-toolbar>
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #sidenav class="example-drawer mat-typography sidenav" [mode]="isMobileScreen ? 'over' : 'side'" [opened]="isMobileScreen ? 'false' : 'true'" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+		<mat-nav-list>
+      @for (item of navItems; track $index) {
+          <mat-list-item (click)="item.expanded = !item.expanded" class="parent">
+              <mat-icon mat-list-icon class="example-icon">{{item.iconName}}</mat-icon>
+              <span class="example-icon" *ngIf="isExpanded || isShowing">{{item.parent}}</span>
+              <mat-icon class="menu-button example-icon" [ngClass]="{'rotated' : item.expanded}" *ngIf="(isExpanded || isShowing) && !item.expanded">expand_more</mat-icon>
+              <mat-icon class="menu-button example-icon" [ngClass]="{'rotated' : item.expanded}" *ngIf="(isExpanded || isShowing) && item.expanded">expand_less</mat-icon>
+            </mat-list-item>
+          @if (item.children && isExpanded || isShowing) {
+            @for (child of item.children; track $index) {
+              <div class="submenu" [ngClass]="{'expanded' : item.expanded}" *ngIf="item.expanded">
+                  
+                <mat-icon  mat-list-icon class="example-icon">{{child.iconName}}</mat-icon> 
+                <a mat-list-item class="example-icon" href="{{child.route}}">{{child.displayName}}</a>
+                  
+              </div>
+            }
+          }
+          
+      }
+    </mat-nav-list>
+	</mat-sidenav>
+  <mat-sidenav-content color="bg-primary" class="sidenav-content">
+    <router-outlet/>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>
+
