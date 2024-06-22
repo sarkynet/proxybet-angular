@@ -7,6 +7,7 @@ html, body{
 .example-spacer {
     flex: 1 1 auto;
   }
+
 .flex{
   display: inline-flex;
 
@@ -24,10 +25,43 @@ html, body{
   // }
   .mdc-list-item__primary-text:hover{
     color: whitesmoke !important;
-    font-weight: bold;
   }
 .example-icon{
   color: whitesmoke !important;
 }
-
-
+.warn{
+  color: white !important;
+  background-color: #ff9c07 !important;
+}
+.danger{
+  color: white !important;
+  background-color: red !important;
+}
+.accent{
+  color: white !important;
+  background-color: #67b909 !important;
+}
+.success{
+  color: white !important;
+  background-color: #10a502 !important;
+}
+.warn-text{
+  color: #ff9c07 !important;
+  font-size: 16px !important;
+  letter-spacing: 1px !important;
+}
+.danger-text{
+  color: red !important;
+  font-size: 16px !important;
+  letter-spacing: 1px !important;
+}
+.accent-text{
+  color: #63b405 !important;
+  font-size: 16px !important;
+  letter-spacing: 1px !important;
+}
+.success-text{
+  color: #10a502 !important;
+  font-size: 16px !important;
+  letter-spacing: 1px !important;
+}

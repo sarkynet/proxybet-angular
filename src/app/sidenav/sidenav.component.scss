@@ -1,7 +1,5 @@
 .sidenav{
     user-select: none;
-    box-shadow: 2px 2px 6px 1px #48494d !important;
-    z-index: 6;
     color: #f5deb3 !important;
      
     .parent{
@@ -44,21 +42,15 @@
 }
 
 .mat-sidenav-container{
-    display: flex;
     min-height: 600px;
     height: max-content;
-    overflow: auto;
     margin: 0;
     padding: 0;
-    // background-color: #333257;
     
     .sidenav-content{
         margin: 10px 20px;
         padding: 20px;
-        display: flex;
         height: 100%;
-        align-items: center;
-        justify-content: center;
     }
 }
 
