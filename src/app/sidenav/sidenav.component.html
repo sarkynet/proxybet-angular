@@ -1,5 +1,5 @@
 <div  [ngClass]="{'darkMode': isDark, 'lightMode': !isDark}">
-  <mat-toolbar color="primary mat-elevation-z8" class="header">
+  <mat-toolbar color="primary mat-elevation-z8" class="header sticky">
     <!-- <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button> -->
     <button mat-icon-button (click)="checkMobible()"><mat-icon>menu</mat-icon></button>
     <img class="logo" src="assets/images/sarkynet_logo_white.png" alt="" srcset="" width="35" height="40">
@@ -20,13 +20,13 @@
   <mat-sidenav #sidenav class="mat-elevation-z8 mat-typography sidenav" [mode]="isMobileScreen ? 'over' : 'side'" [opened]="isMobileScreen ? 'false' : 'true'" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 		<mat-nav-list>
       @for (item of navItems; track $index) {
+        @if (item.children && isExpanded || isShowing) {
           <mat-list-item (click)="item.expanded = !item.expanded" class="parent">
               <mat-icon mat-list-icon class="example-icon">{{item.iconName}}</mat-icon>
               <span class="example-icon" *ngIf="isExpanded || isShowing">{{item.parent}}</span>
               <mat-icon class="menu-button example-icon" [ngClass]="{'rotated' : item.expanded}" *ngIf="(isExpanded || isShowing) && !item.expanded">expand_more</mat-icon>
               <mat-icon class="menu-button example-icon" [ngClass]="{'rotated' : item.expanded}" *ngIf="(isExpanded || isShowing) && item.expanded">expand_less</mat-icon>
             </mat-list-item>
-          @if (item.children && isExpanded || isShowing) {
             @for (child of item.children; track $index) {
               <div class="submenu" [ngClass]="{'expanded' : item.expanded}" *ngIf="item.expanded">
                   
@@ -36,8 +36,14 @@
               </div>
             }
           }
-          
+          @else {
+            <mat-list-item (click)="item.expanded = !item.expanded" class="parent">
+              <mat-icon mat-list-icon class="example-icon">{{item.iconName}}</mat-icon>
+              <a href="{{item.route}}" class="example-icon" *ngIf="isExpanded || isShowing">{{item.parent}}</a>
+            </mat-list-item>
       }
+
+          }
     </mat-nav-list>
 	</mat-sidenav>
   <mat-sidenav-content color="bg-primary" class="sidenav-content">
@@ -45,4 +51,3 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 </div>
-

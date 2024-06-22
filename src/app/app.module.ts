@@ -17,7 +17,7 @@ import { PaymentsComponent } from './features/payments/payments.component';
 import { WalletComponent } from './features/wallet/wallet.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { ResetComponent } from './features/auth/reset/reset.component';
-
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { ResetComponent } from './features/auth/reset/reset.component';
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })

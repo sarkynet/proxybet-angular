@@ -1,1 +1,91 @@
-<p>list-tickets works!</p>
+<div class="flex">
+    <mat-divider></mat-divider>
+    <mat-card class="example-card mat-elevation-z8" style="background-color: #243347; color: white;">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">12</mat-card-title>
+            <hr style="width: 95%;"/>
+        </mat-card-header>
+        <mat-card-content class="card-subtitle" style="color: white;">Total Tickets</mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card mat-elevation-z8" style="background-color: #7cc925; color: white;">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">7</mat-card-title>
+            <hr style="width: 95%;"/>
+        </mat-card-header>
+        <mat-card-content class="card-subtitle" style="color: white;">Active Tickets</mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card mat-elevation-z8" color="accent" style="background-color: #ff9c07; color: white;">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">3</mat-card-title>
+            <hr style="width: 95%;"/>
+        </mat-card-header>
+        <mat-card-content class="card-subtitle" style="color: white;">Pending Tickets</mat-card-content>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <mat-card class="example-card mat-elevation-z8" color="accent" style="background-color: red; color: white;">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">2</mat-card-title>
+            <hr style="width: 95%;"/>
+        </mat-card-header>
+        <mat-card-content class="card-subtitle" style="color: white;">Closed Tickets</mat-card-content>
+    </mat-card>
+</div>
+<div class="flex " style="margin-top: 20px;">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.odd}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="odd">
+            <th mat-header-cell *matHeaderCellDef> Odds </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+          </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Expiring </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+         <!-- Symbol Column -->
+         <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button color="primary" routerLink="tickets/view"><mat-icon>list</mat-icon> View</button> 
+            </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+         <ng-container matColumnDef="bet">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-raised-button [disabled]="element.disabled" color="accent" (click)="openViewDialog('5000ms', '1000ms')"><mat-icon>send</mat-icon> Bet</button>  
+            </td>
+          </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>
+    

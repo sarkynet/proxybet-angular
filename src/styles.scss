@@ -1,20 +1,23 @@
 @import "theme";
 
+$myFont: Helvetica, sans-serif;
+$primary: red;
+$myFontSize: 18px;
+$myWidth: 680px;
+
 html, body{
     margin: 0;
     padding: 0;
+    font-family: $myFont;
 }
 .example-spacer {
     flex: 1 1 auto;
   }
 
-.flex{
-  display: inline-flex;
-
-  .mat-card{
-    display: inline-flex;
-  }
+a{
+  text-decoration: none;
 }
+
 // .logo{
 //     width: 200px !important;
 //     height: 40px !important;

@@ -8,44 +8,15 @@ export const navItems: NavItem[] = [
     children: [{
       displayName: 'Dashboard',
       iconName: 'layout-dashboard',
-      route: 'dashboard',
+      route: '',
     }]
   },
   
   {
-    parent: 'Ui Components',
+    parent: 'Tickets',
     expanded:false,
     iconName: 'list',
-    children: [{
-      displayName: 'Badge',
-      iconName: 'rosette',
-      route: '/ui-components/badge',
-      disabled: true
-    },
-    {
-      displayName: 'Chips',
-      iconName: 'poker-chip',
-      route: '/ui-components/chips',
-      disabled: true
-    },
-    {
-      displayName: 'Lists',
-      iconName: 'list',
-      route: '/ui-components/lists',
-      disabled: true
-    },
-    {
-      displayName: 'Menu',
-      iconName: 'layout-navbar-expand',
-      route: '/ui-components/menu',
-      disabled: true
-    },
-    {
-      displayName: 'Tooltips',
-      iconName: 'tooltip',
-      route: '/ui-components/tooltips',
-      disabled: true
-    }]
+    route: 'tickets'
   },
 
   {

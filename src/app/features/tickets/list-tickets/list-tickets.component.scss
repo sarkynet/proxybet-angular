@@ -1,0 +1,84 @@
+// p {
+//     font-family: Lato;
+//   }
+.flex{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+  
+  .example-card {
+    max-width: 300px;
+    margin: 4px;
+    width: 200px;
+    
+    // background-color: teal;
+  }
+.card-header{
+    display: flex;
+    flex-direction: column;
+}
+.card-title{
+    font-size: 50px !important;
+    text-align: center !important;
+ }
+.card-subtitle{
+    text-align: center;
+}
+table{
+    width: 100%;
+}
+.mat-column-position{
+    width: 5%;
+}
+.mat-column-name{
+    width: 10%;
+}
+.mat-column-action{
+    width: 15%;
+}
+.mat-column-weight{
+    width: 40%;
+}
+.mat-column-odd{
+    width: 5%;
+}
+.mat-column-symbol{
+    width: 15%;
+}
+
+@media screen and (max-width: 768) {
+    .flex{
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100%;
+    }
+      
+    .example-card {
+    margin-bottom: 20px;
+    width: 200px !important;
+    
+    // background-color: teal;
+    }
+    table{
+        overflow-x: auto;
+    }
+    .mat-column-position{
+        width: fit-content;
+    }
+    .mat-column-name{
+        width: fit-content;
+    }
+    .mat-column-action{
+        width: auto;
+    }
+    .mat-column-weight{
+        width: auto;
+    }
+    .mat-column-odd{
+        width: auto;
+    }
+    .mat-column-symbol{
+        width: max-content;
+    }
+}
