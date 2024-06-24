@@ -1,0 +1,32 @@
+.bet-container {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+
+    mat-card{
+        width: 80%;
+        margin: auto;
+        height: 300px !important;
+    }
+  }
+  .title{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+    margin-top: 35px !important;
+  }
+  .form-field{
+    height: fit-content;
+    padding: 5px;
+    margin: 30px auto;
+  }
+  .form-button{
+    width: 50%;
+  }
+  .button-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  

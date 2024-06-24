@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog, matDialogAnimations } from '@angular/material/dialog';
 import { ViewTicketComponent } from '../view-ticket/view-ticket.component';
+import { BetsComponent } from '../../bets/bets.component';
+import { HomeComponent } from '../../home/home.component';
 
 export interface PeriodicElement {
   name: string;
@@ -36,7 +38,7 @@ export class ListTicketsComponent {
   dataSource = ELEMENT_DATA;
   
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog 
   ) {}
   ngOnInit(){
     this.statusClass()
@@ -60,7 +62,7 @@ export class ListTicketsComponent {
     }
   }
   openViewDialog(easein:string, easeout:string): void {
-    const dialogRef = this.dialog.open(ViewTicketComponent, {
+    const dialogRef = this.dialog.open(BetsComponent, {
       height: '400px',
       width: '600px',
     });

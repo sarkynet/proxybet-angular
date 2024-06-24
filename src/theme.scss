@@ -30,6 +30,8 @@ $test-dark-theme: mat.m2-define-dark-theme((
     primary: $theme-primary,
     accent: $theme-accent,
     warn: $theme-warn,
+    danger: $theme-error,
+    success: $theme-success,
   )
 ));
 
@@ -45,7 +47,7 @@ $test-dark-theme: mat.m2-define-dark-theme((
   .mat-drawer-container {
     background: mat.m2-get-color-from-palette($theme-primary, 900) !important;
   }
-  .sidenav, table {
+  .sidenav, table, .example-card {
     background: mat.m2-get-color-from-palette($theme-primary, 800) !important;
   }
   background: mat.m2-get-color-from-palette($theme-primary, 800) !important;

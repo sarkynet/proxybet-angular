@@ -1,5 +1,4 @@
 <div class="flex">
-    <mat-divider></mat-divider>
     <mat-card class="example-card mat-elevation-z8" style="background-color: #243347; color: white;">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">12</mat-card-title>
@@ -7,7 +6,6 @@
         </mat-card-header>
         <mat-card-content class="card-subtitle" style="color: white;">Total Tickets</mat-card-content>
     </mat-card>
-    <mat-divider></mat-divider>
     <mat-card class="example-card mat-elevation-z8" style="background-color: #7cc925; color: white;">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">7</mat-card-title>
@@ -15,7 +13,6 @@
         </mat-card-header>
         <mat-card-content class="card-subtitle" style="color: white;">Active Tickets</mat-card-content>
     </mat-card>
-    <mat-divider></mat-divider>
     <mat-card class="example-card mat-elevation-z8" color="accent" style="background-color: #ff9c07; color: white;">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">3</mat-card-title>
@@ -23,7 +20,6 @@
         </mat-card-header>
         <mat-card-content class="card-subtitle" style="color: white;">Pending Tickets</mat-card-content>
     </mat-card>
-    <mat-divider></mat-divider>
     <mat-card class="example-card mat-elevation-z8" color="accent" style="background-color: red; color: white;">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">2</mat-card-title>
@@ -72,7 +68,7 @@
          <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button color="primary" routerLink="tickets/view"><mat-icon>list</mat-icon> View</button> 
+                <button mat-raised-button color="primary" routerLink="/tickets/view"><mat-icon>list</mat-icon> View</button> 
             </td>
           </ng-container>
 
@@ -80,7 +76,7 @@
          <ng-container matColumnDef="bet">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button [disabled]="element.disabled" color="accent" (click)="openViewDialog('5000ms', '1000ms')"><mat-icon>send</mat-icon> Bet</button>  
+                <button mat-raised-button [disabled]="element.disabled" color="accent" routerLink="/tickets/stake"><mat-icon>send</mat-icon> Bet</button>  
             </td>
           </ng-container>
       

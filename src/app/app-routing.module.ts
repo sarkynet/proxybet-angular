@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { ViewTicketComponent } from './features/tickets/view-ticket/view-ticket.component';
 import { ListTicketsComponent } from './features/tickets/list-tickets/list-tickets.component';
+import { BetsComponent } from './features/bets/bets.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "tickets/view", component: ViewTicketComponent},
   {path: "tickets", component: ListTicketsComponent},
+  {path: "tickets/stake", component: BetsComponent},
   {
     path: 'dashboard',
     redirectTo: ({ queryParams }) => {
