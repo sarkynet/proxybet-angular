@@ -61,7 +61,6 @@ $test-dark-theme: mat.m2-define-dark-theme((
   .sidenav {
     background: mat.m2-get-color-from-palette($theme-primary, 400) !important;
   }
-  background: mat.m2-get-color-from-palette($theme-primary, 100) !important;
  }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.

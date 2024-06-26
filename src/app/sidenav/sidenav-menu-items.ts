@@ -5,18 +5,21 @@ export const navItems: NavItem[] = [
     parent: 'Home',
     expanded:false,
     iconName: 'home',
-    children: [{
-      displayName: 'Dashboard',
-      iconName: 'layout-dashboard',
-      route: '',
-    }]
+    route: ''
   },
   
   {
     parent: 'Tickets',
     expanded:false,
-    iconName: 'list',
+    iconName: 'dns',
     route: 'tickets'
+  },
+
+  {
+    parent: 'Wallets',
+    expanded:false,
+    iconName: 'account_balance_wallet',
+    route: 'wallets'
   },
 
   {

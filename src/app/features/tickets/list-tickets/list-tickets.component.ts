@@ -61,17 +61,5 @@ export class ListTicketsComponent {
       
     }
   }
-  openViewDialog(easein:string, easeout:string): void {
-    const dialogRef = this.dialog.open(BetsComponent, {
-      height: '400px',
-      width: '600px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // if (result !== undefined) {
-      //   this.animal.set(result);
-      // }
-    });
-  }
+  
 }

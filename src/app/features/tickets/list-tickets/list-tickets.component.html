@@ -68,7 +68,7 @@
          <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button color="primary" routerLink="/tickets/view"><mat-icon>list</mat-icon> View</button> 
+                <button mat-raised-button color="primary" routerLink="view"><mat-icon>list</mat-icon> View</button> 
             </td>
           </ng-container>
 
@@ -76,7 +76,7 @@
          <ng-container matColumnDef="bet">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button [disabled]="element.disabled" color="accent" routerLink="/tickets/stake"><mat-icon>send</mat-icon> Bet</button>  
+                <button mat-raised-button [disabled]="element.disabled" color="accent" routerLink="stake"><mat-icon>send</mat-icon> Bet</button>  
             </td>
           </ng-container>
       

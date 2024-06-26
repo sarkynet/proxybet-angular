@@ -18,14 +18,6 @@ a{
   text-decoration: none;
 }
 
-// .logo{
-//     width: 200px !important;
-//     height: 40px !important;
-//     margin-left: 50px;
-//   }
-  // .mdc-list-item__primary-text{
-  //   color: $light-warning !important;
-  // }
   .mdc-list-item__primary-text:hover{
     color: whitesmoke !important;
   }
@@ -85,6 +77,14 @@ a{
   
   // background-color: teal;
 }
+.example-card2 {
+  max-width: 300px;
+  margin: 4px;
+  width: 200px;
+  
+  // background-color: teal;
+}
+
 .card-header{
   display: flex;
   flex-direction: column;
@@ -135,4 +135,45 @@ table{
       overflow-x: auto;
   }
  
+}
+
+/***** CARD DESIgn*****/
+.bet-container {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+
+  mat-card{
+      margin: auto;
+  }
+}
+.form-card {
+  max-width: 600px;
+  width: 300px;
+  height: auto;
+}
+.title{
+  font-size: 20px !important;
+  font-weight: bolder !important;
+  padding: 5px;
+  text-align: center;
+  margin-top: 35px !important;
+}
+.form-field{
+  height: fit-content;
+  padding: 5px;
+  width: 90% !important;
+  margin: auto;
+}
+
+.button-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.hint{
+  font-size: small;
+  color: #ff5507;
 }
