@@ -1,1 +1,21 @@
-<p>fund works!</p>
+<div class="bet-container">
+    <mat-card class="form-card mat-elevation-z8">
+      <mat-card-title class="title">Wallet Funding Form</mat-card-title>
+      <hr style="width: 90%;" color="grey"/>
+      <mat-card-content>
+          <form class="example-form">
+              <mat-form-field class="form-field">
+                  <mat-label>Amount</mat-label>
+                  <input matInput type="number" class="example-right-align" placeholder="0" />
+                  <span matTextPrefix>$&nbsp;</span>
+                  <span matTextSuffix>.00</span>
+                  <mat-hint class="hint" align="end">Minimum stake is $200.00</mat-hint>
+                </mat-form-field>
+                <div class="button-div">
+                  <button class="form-button" mat-button type="submit" mat-raised-button color="primary">Submit</button>
+                </div>
+              
+          </form>
+  </mat-card-content>
+  </mat-card>
+</div>

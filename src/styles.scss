@@ -18,11 +18,14 @@ a{
   text-decoration: none;
 }
 
-  .mdc-list-item__primary-text:hover{
+.mdc-list-item__primary-text:hover{
     color: whitesmoke !important;
   }
+.mdc-list-item__primary-text{
+  color: white !important;
+}
 .example-icon{
-  color: whitesmoke !important;
+  color: white !important;
 }
 .warn{
   color: white !important;

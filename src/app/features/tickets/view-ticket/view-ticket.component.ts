@@ -23,6 +23,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 'Aston VIlla FC', name: 'closed', weight: 18.9984, symbol: '25/09/24', odd:'Dotmond FC', class:'', disabled: false},
   {position: 'Everton FC', name: 'active', weight: 20.1797, symbol: '25/09/24', odd:'Sevilla', class:'', disabled: false},
 ];
+
 @Component({
   selector: 'app-view-ticket',
   templateUrl: './view-ticket.component.html',

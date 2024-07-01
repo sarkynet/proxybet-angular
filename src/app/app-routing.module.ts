@@ -6,6 +6,10 @@ import { ListTicketsComponent } from './features/tickets/list-tickets/list-ticke
 import { BetsComponent } from './features/bets/bets.component';
 import { WalletComponent } from './features/wallet/wallet.component';
 import { WalletDialogComponent } from './features/wallet/wallet-dialog/wallet-dialog.component';
+import { PaymentsComponent } from './features/payments/payments.component';
+import { FundComponent } from './features/payments/fund/fund.component';
+import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
+import { CoinsComponent } from './features/payments/coins/coins.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -36,16 +40,16 @@ const routes: Routes = [
   {path: "payments", 
     children: [{
       path: '',
-      component: WalletComponent
+      component: PaymentsComponent
     }, {
       path: 'fund',
-      component: WalletComponent
+      component: FundComponent
     }, {
       path: 'withdraw',
-      component: ViewTicketComponent
+      component: WithdrawComponent
     }, {
-      path: 'history',
-      component: ViewTicketComponent
+      path: 'coins',
+      component: CoinsComponent
     }]
   },
   {

@@ -22,6 +22,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { WalletDialogComponent } from './features/wallet/wallet-dialog/wallet-dialog.component';
 import { FundComponent } from './features/payments/fund/fund.component';
 import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
+import { CoinsComponent } from './features/payments/coins/coins.component';
+import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { WithdrawComponent } from './features/payments/withdraw/withdraw.compone
     ResetComponent,
     WalletDialogComponent,
     FundComponent,
-    WithdrawComponent
+    WithdrawComponent,
+    CoinsComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

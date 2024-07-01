@@ -23,6 +23,44 @@ export const navItems: NavItem[] = [
   },
 
   {
+    parent: 'Payments',
+    expanded:false,
+    iconName: 'account_balance',
+    route: 'payments',
+    children: [
+        {
+          displayName: 'Fund Wallet',
+          iconName: 'account_balance_wallet',
+          route: '/payments/fund',
+          disabled: true
+        },
+        {
+          displayName: 'Withdraw Fund',
+          iconName: 'account_balance_wallet',
+          route: '/payments/withdraw',
+          disabled: true
+    }]
+  },
+
+  {
+    parent: 'VIrtual Games',
+    expanded:false,
+    iconName: 'play',
+    children: [{
+      displayName: 'Moneycase',
+      iconName: 'money',
+      route: '',
+      disabled: true
+    },
+    {
+      displayName: 'Goobad Circles',
+      iconName: 'user-plus',
+      route: '',
+      disabled: true
+    }]
+  },
+  
+  {
     parent: 'Auth',
     expanded:false,
     iconName: 'person',
@@ -38,26 +76,6 @@ export const navItems: NavItem[] = [
       route: '/authentication/register',
       disabled: true
     }]
-  },
-  
-  {
-    parent: 'Extra',
-    expanded:false,
-    iconName: 'share',
-    children: [
-      {
-        displayName: 'Icons',
-        iconName: 'mood-smile',
-        route: '/extra/icons',
-        disabled: true
-      },
-      {
-        displayName: 'Sample Page',
-        iconName: 'aperture',
-        route: '/extra/sample-page',
-        disabled: true
-      }
-    ]
   }
   
 ];
