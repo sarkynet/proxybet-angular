@@ -2,7 +2,7 @@
 
 
 $dark-primary-text: rgba(#0f161d, 0.87);
-$dark-secondary-text: rgba(#0f161d, 0.87);
+$dark-secondary-text: rgba(#1a221c, 0.87);
 $dark-disabled-text: rgba(#0f161d, 0.38);
 $dark-dividers: rgba(#0f161d, 0.12);
 $dark-focused: rgba(#0f161d, 0.12);
@@ -202,6 +202,7 @@ $light-theme-background-palette: (
   disabled-list-option: map.get($blue-grey-palette, 200),
   tooltip: map.get($blue-grey-palette, 700),
   sidenav: map.get($blue-grey-palette, 400),
+  select: white
 );
 
 // Background palette for dark themes.
@@ -222,6 +223,7 @@ $dark-theme-background-palette: (
   disabled-list-option: rgba(white, 0.12),
   tooltip: map.get($blue-grey-palette, 700),
   sidenav: map.get($blue-grey-palette, 700),
+  select: map.get($blue-grey-palette, 700)
 );
 
 // Foreground palette for light themes.

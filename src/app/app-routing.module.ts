@@ -10,6 +10,7 @@ import { PaymentsComponent } from './features/payments/payments.component';
 import { FundComponent } from './features/payments/fund/fund.component';
 import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
 import { CoinsComponent } from './features/payments/coins/coins.component';
+import { CreateTicketComponent } from './features/tickets/create-ticket/create-ticket.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -23,6 +24,9 @@ const routes: Routes = [
     }, {
       path: 'view',
       component: ViewTicketComponent
+    }, {
+      path: 'create',
+      component: CreateTicketComponent
     }]},
   {path: "my-bets", component: BetsComponent},
   {path: "wallets", 

@@ -4,14 +4,13 @@
 @import "color-pallette";
 
 $theme-primary: mat.m2-define-palette($blue-grey-palette);
-$theme-dark-primary: mat.m2-define-palette($indigo-palette, 900, 700, 800, 100);
 $theme-accent: mat.m2-define-palette($light-green-palette);
 $theme-warn: mat.m2-define-palette($amber-palette);
 $theme-error: mat.m2-define-palette($orange-palette);
 $theme-success: mat.m2-define-palette($indigo-palette);
 
 // Define the theme object.
-$test-light-theme: mat.m2-define-light-theme((
+$light-theme: mat.m2-define-light-theme((
   color: (
     primary: $theme-primary,
     accent: $theme-accent,
@@ -25,7 +24,7 @@ $test-light-theme: mat.m2-define-light-theme((
 ));
 
 // Define the theme object.
-$test-dark-theme: mat.m2-define-dark-theme((
+$dark-theme: mat.m2-define-dark-theme((
   color: (
     primary: $theme-primary,
     accent: $theme-accent,
@@ -43,24 +42,27 @@ $test-dark-theme: mat.m2-define-dark-theme((
 // }
 
 .darkMode {
-  @include mat.all-component-themes($test-dark-theme);
+  @include mat.all-component-themes($dark-theme);
   .mat-drawer-container {
     background: mat.m2-get-color-from-palette($theme-primary, 900) !important;
   }
   .sidenav, table, .example-card, .form-card {
-    background: mat.m2-get-color-from-palette($theme-primary, 800) !important;
+      background: mat.m2-get-color-from-palette($theme-primary, 800) !important;
   }
+
   background: mat.m2-get-color-from-palette($theme-primary, 800) !important;
+  @import "./darkstyles.scss";
  }
  
  .lightMode {
-  @include mat.all-component-themes($test-light-theme);
   .mat-drawer-container {
     background: mat.m2-get-color-from-palette($theme-primary, 100) !important;
   }
   .sidenav {
     background: mat.m2-get-color-from-palette($theme-primary, 400) !important;
   }
+  @include mat.all-component-themes($light-theme);
+  @import "./lightstyles.scss";
  }
 
 // Comment out the line below if you want to use the pre-defined typography utility classes.

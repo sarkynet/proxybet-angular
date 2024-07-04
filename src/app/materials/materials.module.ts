@@ -36,8 +36,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRippleModule} from '@angular/material/core';
-// import {MatMomentDateModule} from '@angular/material/d';
-
+import {MatNativeDateModule} from '@angular/material/core';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateAdapter, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import {MatRippleModule} from '@angular/material/core';
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
@@ -75,8 +77,12 @@ import {MatRippleModule} from '@angular/material/core';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatRippleModule//,
-    // MatMomentDateModule
+    MatRippleModule,
+    NgxMatSelectSearchModule,
+    NgxMatDatetimePickerModule, 
+    NgxMatTimepickerModule,
+    // MatMomentDateModule,
+    NgxMatNativeDateModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -87,6 +93,7 @@ import {MatRippleModule} from '@angular/material/core';
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
@@ -112,7 +119,11 @@ import {MatRippleModule} from '@angular/material/core';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatRippleModule//,
+    MatRippleModule,
+    NgxMatSelectSearchModule,
+    NgxMatDatetimePickerModule, 
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule//,
     // MatMomentDateModule
   ]
 })

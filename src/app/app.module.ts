@@ -24,6 +24,9 @@ import { FundComponent } from './features/payments/fund/fund.component';
 import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
 import { CoinsComponent } from './features/payments/coins/coins.component';
 import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
+import { NgxMatDateAdapter, NgxMatNativeDateAdapter } from '@angular-material-components/datetime-picker';
+import { MAT_DATE_LOCALE, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
+// momentdate
 
 @NgModule({
   declarations: [
@@ -44,7 +47,7 @@ import { EditProfileComponent } from './features/user/edit-profile/edit-profile.
     FundComponent,
     WithdrawComponent,
     CoinsComponent,
-    EditProfileComponent
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { EditProfileComponent } from './features/user/edit-profile/edit-profile.
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent]
 })
