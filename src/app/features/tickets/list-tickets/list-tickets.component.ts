@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { MatDialog, matDialogAnimations } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { ViewTicketComponent } from '../view-ticket/view-ticket.component';
-import { BetsComponent } from '../../bets/bets.component';
-import { HomeComponent } from '../../home/home.component';
+import { TicketService } from '../../../services/ticket.service';
+import { Fixture, Ticket } from '../create-ticket/ticket-interface';
 
 export interface PeriodicElement {
   name: string;
@@ -34,31 +35,47 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrl: './list-tickets.component.scss'
 })
 export class ListTicketsComponent {
+  @ViewChild(MatTable) table!:MatTable<any>
   displayedColumns: string[] = ['position', 'name', 'weight', 'odd', 'symbol', 'action', 'bet'];
-  dataSource = ELEMENT_DATA;
+  tickets!: Ticket[];
+  dataSource = this.tickets;
+  fixtures!: Fixture[]; 
   
   constructor(
-    public dialog: MatDialog 
+    public dialog: MatDialog,
+    public ticketService: TicketService 
   ) {}
   ngOnInit(){
+    this.tickets = this.ticketService.getTickets();
+    this.dataSource = this.tickets
+    
     this.statusClass()
   }
 
+  getTotalOdds(element:Fixture[]) {
+    let total:number = element.reduce((accum,item) => accum + item.odd, 0);
+    
+    return total;
+  }
+
   statusClass (){
-    for (let index = 0; index < ELEMENT_DATA.length; index++) {
-      const element = ELEMENT_DATA[index];
-      if (element.name == 'active') {
+    for (let index = 0; index < this.tickets.length; index++) {
+      const element = this.tickets[index];
+      if (element.status == 'Active') {
         element.class = "accent-text";
-      }else if (element.name == 'pending') {
+      }else if (element.status == 'Pending') {
         element.class = "warn-text";
-        element.symbol = 'expired';
+        // element.symbol = 'expired';
         element.disabled = true;
-      }else if (element.name == 'closed') {
+      }else if (element.status == 'Closed') {
         element.class = "danger-text";
-        element.symbol = 'expired';
+        // element.symbol = 'expired';
         element.disabled = true;
       }
-      
+      else if (element.status == 'In Progress') {
+        element.class = "primary-text";
+        element.disabled = true;
+      }
     }
   }
   

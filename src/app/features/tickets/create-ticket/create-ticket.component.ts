@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Fixture, Ticket } from './ticket-interface'
 import { MatTable } from '@angular/material/table';
 import { TicketService } from '../../../services/ticket.service';
+import { Router } from '@angular/router';
+import { Leagues } from '../../../data/leagues';
 
 @Component({
   selector: 'app-create-ticket',
@@ -11,28 +13,21 @@ import { TicketService } from '../../../services/ticket.service';
 })
 
 export class CreateTicketComponent {
-  @ViewChild(MatTable) table:MatTable<any> | undefined
+  @ViewChild(MatTable) table!:MatTable<any>
   readonly date = new FormControl(new Date());
   readonly serializedDate = new FormControl(new Date().toISOString());
   fixture!: Fixture
-  fixtures: Fixture[] = [];
-  ticket: Ticket = {
-    title: "",
-    limit: 0,
-    closeTime: '',
-    closeDate: '',
-    fixtures:  [],
-    totalOdds: 0,
-    status: '',
-    win: false,
-    users: []
-  };
+  fixtures!: Fixture[];
+  ticket!: Ticket
   page2 = false;
+  leagues = Leagues;
+  Ateams:any = [];
+  Bteams:any = [];
 
-  constructor (public ticketServie: TicketService) {}
+  constructor (public ticketService: TicketService, public router: Router) {}
   displayedColumns: string[] = ['S/N', 'TEAM A', 'TEAM B', 'OPTION', 'ODD', 'ACTION'];
   dataSource = this.fixtures;
-  
+  route = this.router.url;
   // ticketForm = new FormGroup({
   //   title: new FormControl('', [Validators.required]),
   //   closeTime: new FormControl('', [Validators.required]),
@@ -43,31 +38,30 @@ export class CreateTicketComponent {
   // get closeTime(): any { return this.ticketForm.get('lastName'); }
   // get maxStake(): any { return this.ticketForm.get('address'); }
 
-  saveInfo(ticketData:Ticket){
-    console.log(new Date(ticketData.closeDate).toDateString());
-    console.log(new Date(ticketData.closeDate).toLocaleTimeString());
-    console.log(new Date(ticketData.closeDate).toLocaleDateString());
-    console.log(new Date(ticketData.closeDate).toTimeString());
+  saveInfo(ticketData:any){
+    // console.log(new Date(ticketData.value.closeDate).toDateString());
+    // console.log(new Date(ticketData.value.closeDate).toLocaleTimeString());
+    // console.log(new Date(ticketData.value.closeDate).toLocaleDateString());
+    // console.log(new Date(ticketData.value.closeDate).toTimeString());
     
-    if (ticketData) {
-      this.ticket.title = ticketData.title;
-      this.ticket.closeTime = new Date(ticketData.closeDate).toLocaleTimeString();
-      this.ticket.closeDate = new Date(ticketData.closeDate).toDateString();
-      this.ticket.limit = ticketData.limit;
+    if (ticketData.value) {
+      this.ticket = ticketData.value;
+      this.ticket.closeTime = new Date(ticketData.value.closeDate).toLocaleTimeString();
+      this.ticket.closeDate = new Date(ticketData.value.closeDate).toDateString();
       this.page2 = true;
-      // console.log(this.ticket);
-      // this.forms.ticketForm.reset();
+      ticketData.reset();
       
-    }
-    
+    } 
   }
 
   saveMatch (match:any) {
-    // console.log(match);
+    if (!this.fixtures)
+      this.fixtures = [];
+
     this.fixtures.push(match.value);
     // console.log(this.fixtures);
-    this.table?.renderRows()
-    match.reset();
+    this.dataSource = this.fixtures;
+     match.reset();
   }
 
   deleteMatch(match:Fixture) {
@@ -83,18 +77,88 @@ export class CreateTicketComponent {
   }
 
   getTotalOdds() {
-    let total:number = this.fixtures.reduce((accum,item) => accum + item.odd, 0);
-    // for (let index = 0; index < this.fixtures.length; index++) {
-    //   const element = this.fixtures[index];
-    //   total += element.odd;
-    // }
-    return total;
+    let total:number = 0;
+    if (this.fixtures){ 
+      total = this.fixtures.reduce((accum,item) => accum + item.odd, 0);
+    }
+    return Math.round(total);
+  }
+
+  getLastGameTime() {
+    let lastTime = 0;
+    for (let index = 0; index < this.fixtures.length; index++) {
+      const element = this.fixtures[index];
+      if (new Date(element.time).getTime()  > lastTime) 
+        lastTime = new Date(element.time).getTime();
+    }
+    return lastTime;
+  }
+
+  setTicketStatus(ticket:any){
+    let status: string; 
+    let today = new Date().getTime();
+    let hour = 3600000;
+    let ticketDate = new Date(ticket.closeDate).getTime()
+    let lastGame = this.getLastGameTime()
+    if (ticketDate - today > hour) {
+      status = "Active";
+    }
+    else if ((ticketDate - today <= hour) && (ticketDate - today > 1)) {
+      status = "Pending";
+    }
+    else if (lastGame < today) {
+      status = "Closed";
+    }
+    else if ((ticketDate - today < 1) && (lastGame < today)) {
+      status = "In Progress";
+    }
+  }
+
+  getTicketResult(){
+    let result = true;
+    for (let index = 0; index < this.fixtures.length; index++) {
+      const element = this.fixtures[index];
+      if (!element.result) 
+        result = false;
+    }
+    return result;
   }
 
   saveTicket() {
-    this.ticket.fixtures = this.fixtures
+    this.ticket.fixtures = this.fixtures;
+    this.ticket._id = this.uniqueRef();
     console.log(this.ticket);
     this.page2 = false;
-    this.ticketServie.save(this.ticket);
+    this.ticketService.save(this.ticket);
+    this.router.navigate(['tickets']);
   }
+
+  updateTicket() {
+    this.ticket.fixtures = this.fixtures;
+    console.log(this.ticket);
+    this.page2 = false;
+    this.ticketService.update(this.ticket);
+  }
+
+  uniqueRef() {
+    return Math.random().toString(16).slice(2);
+  }
+
+  getTeamsA(league:any){
+    for (let index = 0; index < this.leagues.length; index++) {
+      const element = this.leagues[index];
+      if (element.title == league) {
+        this.Ateams = element.teams;
+      }
+    }
+  }
+  getTeamsB(league:any){
+    for (let index = 0; index < this.leagues.length; index++) {
+      const element = this.leagues[index];
+      if (element.title == league) {
+        this.Bteams = element.teams;
+      }
+    }
+  }
+
 }

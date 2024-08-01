@@ -1,21 +1,30 @@
 export interface Fixture {
     teamA: string,
     teamB: string,
-    matchTime: Date,
+    time: string,
     option: string,
     odd: number;
     status: string,
-    win: boolean
+    result: boolean
 }
 
 export interface Ticket {
+    _id: string,
     title: string,
+    class: string,
+    disabled: boolean,
     limit: number,
     closeTime: string,
     closeDate: string,
-    fixtures: [] | any,
+    fixtures: Fixture[] ,
     totalOdds: number,
     status: string,
     win: boolean,
-    users: [] | any
+    created: string,
+    users: User[]
+}
+
+interface User {
+    _id:string,
+    stake: number
 }

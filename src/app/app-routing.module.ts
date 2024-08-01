@@ -19,10 +19,10 @@ const routes: Routes = [
       path: '',
       component: ListTicketsComponent
     }, {
-      path: 'stake',
+      path: ':_id/stake',
       component: BetsComponent
     }, {
-      path: 'view',
+      path: 'view/:_id',
       component: ViewTicketComponent
     }, {
       path: 'create',
@@ -76,7 +76,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

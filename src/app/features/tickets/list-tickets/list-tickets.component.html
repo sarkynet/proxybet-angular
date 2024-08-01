@@ -37,38 +37,38 @@
         <!-- Position Column -->
         <ng-container matColumnDef="position">
           <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          <td mat-cell *matCellDef="let element"> {{dataSource.indexOf(element)+1}} </td>
         </ng-container>
       
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.name}} </td>
+          <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.status}} </td>
         </ng-container>
       
         <!-- Weight Column -->
         <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.odd}} </td>
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="odd">
             <th mat-header-cell *matHeaderCellDef> Odds </th>
-            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            <td mat-cell *matCellDef="let element"> {{getTotalOdds(element.fixtures)}} </td>
           </ng-container>
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="symbol">
           <th mat-header-cell *matHeaderCellDef> Expiring </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.closeDate}} </td>
         </ng-container>
 
          <!-- Symbol Column -->
          <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
-                <button mat-raised-button color="primary" routerLink="view"><mat-icon>list</mat-icon> View</button> 
+                <button mat-raised-button color="primary" [routerLink]="'view/'+element._id"><mat-icon>list</mat-icon> View</button> 
             </td>
           </ng-container>
 
@@ -79,9 +79,17 @@
                 <button mat-raised-button [disabled]="element.disabled" color="accent" routerLink="stake"><mat-icon>send</mat-icon> Bet</button>  
             </td>
           </ng-container>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              No data matching the filter.
+            </td>
+          </tr>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+        
+    </table>
+    
 </div>
     

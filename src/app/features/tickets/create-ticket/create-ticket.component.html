@@ -1,132 +1,161 @@
-<div class="flex" style="flex-direction: column;">
-  @if (!page2) {
-      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
-          <mat-card-title class="title">Create Ticket Form</mat-card-title>
-          <mat-card-subtitle class="subtitle">Basic Ticket info</mat-card-subtitle>
-          <hr style="width: 90%;" color="grey"/>
-          <mat-card-content>
-              <form class="example-form" #ticketForm="ngForm" name="ticketForm" (ngSubmit)="saveInfo(ticketForm.value)">
-                  <mat-form-field class="form-field">
-                      <mat-label for="title">Title</mat-label>
-                      <input matInput type="text" name="title" ngModel required/>
-                  </mat-form-field>
-                  <mat-form-field class="form-group">
-                      <mat-label>Closing Date</mat-label>
-                      <input matInput [ngxMatDatetimePicker]="picker" placeholder="" ngModel name="closeDate" required>
-                      <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
-                      <ngx-mat-datetime-picker #picker ></ngx-mat-datetime-picker>
+
+@if (!ticket || !ticket._id) {
+  <div class="flex" style="flex-direction: column;">
+    @if (!page2) {
+        <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+            <mat-card-title class="title">Create Ticket Form</mat-card-title>
+            <mat-card-subtitle class="subtitle">Basic Ticket info</mat-card-subtitle>
+            <hr style="width: 90%;" color="grey"/>
+            <mat-card-content>
+                <form class="example-form" #ticketForm="ngForm" name="ticketForm" (ngSubmit)="saveInfo(ticketForm)">
+                    <mat-form-field class="form-field">
+                        <mat-label for="title">Title</mat-label>
+                        <input matInput type="text" name="title" ngModel required/>
                     </mat-form-field>
-                  <mat-form-field class="form-group">
-                      <mat-label>Maximum Stake</mat-label>
-                      <input matInput type="number" class="example-right-align" placeholder="0" name="limit" ngModel required />
-                      <span matTextPrefix>NGN&nbsp;</span>
-                      <span matTextSuffix>.00</span>
-                      <mat-hint class="hint" align="end">Minimum stake is $200.00</mat-hint>
-                    </mat-form-field>
+                    <mat-form-field class="form-group">
+                        <mat-label>Closing Date</mat-label>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="" ngModel name="closeDate" required>
+                        <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker ></ngx-mat-datetime-picker>
+                      </mat-form-field>
+                    <mat-form-field class="form-group">
+                        <mat-label>Maximum Stake</mat-label>
+                        <input matInput type="number" class="example-right-align" placeholder="0" name="limit" ngModel required />
+                        <span matTextPrefix>NGN&nbsp;</span>
+                        <span matTextSuffix>.00</span>
+                        <mat-hint class="hint" align="end">Minimum stake is $200.00</mat-hint>
+                      </mat-form-field>
+    
+                      <div class="button-div">
+                        <button class="form-button" mat-button type="submit" mat-raised-button color="primary" [disabled]="ticketForm.invalid">Next</button>
+                      </div>
+                    
+                </form>
+        </mat-card-content>
+        </mat-card>
+    }
   
-                    <div class="button-div">
-                      <button class="form-button" mat-button type="submit" mat-raised-button color="primary" [disabled]="ticketForm.invalid">Next</button>
-                    </div>
-                  
-              </form>
-      </mat-card-content>
-      </mat-card>
-  }
-
-  @if (page2) {    
-    <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
-      <mat-card-subtitle class="subtitle">Match Fixtures </mat-card-subtitle>
-      <hr style="width: 90%;" color="grey"/>
-      <mat-card-content>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Position Column -->
-            <ng-container matColumnDef="S/N">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{dataSource.indexOf(element)+1}} </td>
-              <td mat-footer-cell *matFooterCellDef>  </td>
-            </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="TEAM A">
-              <th mat-header-cell *matHeaderCellDef> TEAM A </th>
-              <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.teamA}} </td>
-              <td mat-footer-cell *matFooterCellDef>  </td>
-            </ng-container>
-          
-            <!-- Weight Column -->
-            <ng-container matColumnDef="TEAM B">
-              <th mat-header-cell *matHeaderCellDef> TEAM B </th>
-              <td mat-cell *matCellDef="let element"> {{element.teamB}} </td>
-              <td mat-footer-cell *matFooterCellDef>  </td>
-            </ng-container>
-    
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="OPTION">
-                <th mat-header-cell *matHeaderCellDef> OPTION </th>
-                <td mat-cell *matCellDef="let element"> {{element.option}} </td>
-                <td mat-footer-cell *matFooterCellDef> <b>TOTAL</b> </td>
-              </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="ODD">
-              <th mat-header-cell *matHeaderCellDef> ODD </th>
-              <td mat-cell *matCellDef="let element"> {{element.odd}} </td>
-              <td mat-footer-cell *matFooterCellDef> <b>{{getTotalOdds()}}</b> </td>
-            </ng-container>
-    
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="ACTION">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <button mat-raised-button [disabled]="element.disabled" color="accent" (click)="deleteMatch(element)"><mat-icon class="primary-text">delete</mat-icon> </button>  
-                </td>
+    @if (page2) {    
+      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+        <mat-card-subtitle class="subtitle">Match Fixtures </mat-card-subtitle>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="S/N">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{dataSource.indexOf(element)+1}} </td>
                 <td mat-footer-cell *matFooterCellDef>  </td>
               </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
-        </table>
-      </mat-card-content>
-    </mat-card>
-    <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
-      <mat-card-title class="title">Create Ticket Form</mat-card-title>
-      <mat-card-subtitle class="subtitle">Match Fixtures Buildup</mat-card-subtitle>
-      <hr style="width: 90%;" color="grey"/>
-      <mat-card-content>
-        <form class="example-form" #fixturesForm="ngForm" (ngSubmit)="saveMatch(fixturesForm)">
-          <mat-form-field class="form-group">
-              <mat-label>Select League</mat-label>
-              <mat-select color="primary" >
-                <!-- @for (food of foods; track food) {
-                  <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                } -->
-                <mat-option value="Premier League">Premier League</mat-option>
-                <mat-option value="Serial A">Serial A</mat-option>
-                <mat-option value="La Liga">La Liga</mat-option>
-              </mat-select>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-              <mat-label>Select TEAM A</mat-label>
-              <mat-select color="primary" name="teamA" ngModel required >
-                  <mat-option>
-                      <ngx-mat-select-search></ngx-mat-select-search>
-                  </mat-option>
-                <!-- @for (food of foods; track food) {
-                  <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-                } -->
-                <mat-option value="Arsenal">Arsenal</mat-option>
-                <mat-option value="Inter Millan">Inter Millan</mat-option>
-                <mat-option value="barcelona">barcelona</mat-option>
-              </mat-select>
-          </mat-form-field>
-          <div style="display: block; text-align: center; color: rgb(72, 143, 1); padding-bottom: 10px;"><span>VS</span></div>
-          <mat-form-field class="form-group">
-              <mat-label>Select League</mat-label>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="TEAM A">
+                <th mat-header-cell *matHeaderCellDef> TEAM A </th>
+                <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.teamA}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="TEAM B">
+                <th mat-header-cell *matHeaderCellDef> TEAM B </th>
+                <td mat-cell *matCellDef="let element"> {{element.teamB}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+      
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="OPTION">
+                  <th mat-header-cell *matHeaderCellDef> OPTION </th>
+                  <td mat-cell *matCellDef="let element"> {{element.option}} </td>
+                  <td mat-footer-cell *matFooterCellDef> <b>TOTAL</b> </td>
+                </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="ODD">
+                <th mat-header-cell *matHeaderCellDef> ODD </th>
+                <td mat-cell *matCellDef="let element"> {{element.odd}} </td>
+                <td mat-footer-cell *matFooterCellDef> <b>{{getTotalOdds()}}</b> </td>
+              </ng-container>
+      
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="ACTION">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"> 
+                      <button mat-raised-button [disabled]="element.disabled" color="accent" (click)="deleteMatch(element)"><mat-icon class="primary-text">delete</mat-icon> </button>  
+                  </td>
+                  <td mat-footer-cell *matFooterCellDef>  </td>
+                </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+        <mat-card-title class="title">Create Ticket Form</mat-card-title>
+        <mat-card-subtitle class="subtitle">Match Fixtures Buildup</mat-card-subtitle>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+          <form class="example-form" #fixturesForm="ngForm" (ngSubmit)="saveMatch(fixturesForm)">
+            <mat-form-field class="form-group">
+                <mat-label>Select League</mat-label>
+                <mat-select color="primary" ngModel name="leagueA" (selectionChange)="getTeamsA(fixturesForm.value.leagueA)" required>
+                  @for (leagueA of leagues; track leagueA) {
+                    <mat-option [value]="leagueA.title">{{leagueA.title}}</mat-option>
+                  }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Select TEAM A</mat-label>
+                <mat-select color="primary" name="teamA" ngModel required >
+                    <mat-option>
+                        <ngx-mat-select-search></ngx-mat-select-search>
+                    </mat-option>
+                  @for (teamA of Ateams; track teamA) {
+                    <mat-option [value]="teamA">{{teamA}}</mat-option>
+                  }
+                </mat-select>
+            </mat-form-field>
+            <div style="display: block; text-align: center; color: rgb(72, 143, 1); padding-bottom: 10px;"><span>VS</span></div>
+            <mat-form-field class="form-group">
+                <mat-label>Select League</mat-label>
+                <mat-select color="primary" ngModel name="leagueB" (selectionChange)="getTeamsB(fixturesForm.value.leagueB)" required>
+                  @for (leagueB of leagues; track leagueB) {
+                    <mat-option [value]="leagueB.title">{{leagueB.title}}</mat-option>
+                  }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Select TEAM B</mat-label>
+              <mat-select color="primary" name="teamB" ngModel required>
+                <mat-option>
+                  <ngx-mat-select-search></ngx-mat-select-search>
+              </mat-option>
+              @for (teamB of Bteams; track teamB) {
+                <mat-option [value]="teamB">{{teamB}}</mat-option>
+              }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Option</mat-label>
+              <input matInput type="text" class="example-right-align" placeholder="" name="option" ngModel required/>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Odd</mat-label>
+              <input matInput type="number" class="example-right-align" placeholder="0" name="odd" ngModel required/>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Match Time</mat-label>
+              <input matInput [ngxMatDatetimePicker]="startTime" placeholder="Choose a date"  name="date" ngModel required>
+              <ngx-mat-datepicker-toggle matSuffix [for]="startTime"></ngx-mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #startTime ></ngx-mat-datetime-picker>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Select Tournament</mat-label>
               <mat-select color="primary">
                 <!-- @for (food of foods; track food) {
                   <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
@@ -135,54 +164,216 @@
                 <mat-option value="Serial A">Serial A</mat-option>
                 <mat-option value="La Liga">La Liga</mat-option>
               </mat-select>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-              <mat-label>Select TEAM B</mat-label>
-              <mat-select color="primary" name="teamB" ngModel required>
+            </mat-form-field>
+            <div class="button-div">
+              <button class="form-button" mat-button type="submit" mat-raised-button color="primary">Save</button>
+              <span class="example-spacer"></span>
+              <button class="form-button" mat-button mat-raised-button color="primary" (click)="saveTicket()">Submit Fixtures</button>
+            </div>
+              
+          </form>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}
+@if (ticket && ticket._id) {
+  <div class="flex" style="flex-direction: column;">
+    @if (!page2) {
+      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+        <mat-card-title class="title">Edit Ticket Form</mat-card-title>
+        <mat-card-subtitle class="subtitle">Basic Ticket info</mat-card-subtitle>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+          <form class="example-form" #ticketForm="ngForm" name="ticketForm" (ngSubmit)="saveInfo(ticketForm.value)">
+            <mat-form-field class="form-group">
+                <mat-label for="title">Title</mat-label>
+                <input matInput type="text" name="title" [ngModel]="ticket.title" required/>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Closing Date</mat-label>
+                <input matInput [ngxMatDatetimePicker]="picker" placeholder="" [ngModel]="ticket.closeDate" name="closeDate" required>
+                <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker ></ngx-mat-datetime-picker>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Maximum Stake</mat-label>
+                <input matInput type="number" class="example-right-align" placeholder="0" name="limit" [ngModel]="ticket.limit" required />
+                <span matTextPrefix>NGN&nbsp;</span>
+                <span matTextSuffix>.00</span>
+                <mat-hint class="hint" align="end">Minimum stake is $200.00</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Status</mat-label>
+              <mat-select color="primary" [ngModel]="ticket.status">
+                <mat-option value="Active">Active</mat-option>
+                <mat-option value="Suspeneded">Suspeneded</mat-option>
+                <mat-option value="Cancelled">Cancelled</mat-option>
+                <mat-option value="Closed">Closed</mat-option>
+                <mat-option value="Pending">Pending</mat-option>
+                <mat-option value="In Progress">In Progress</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="button-div">
+              <button class="form-button" mat-button type="submit" mat-raised-button color="primary" [disabled]="ticketForm.invalid">Save</button>
+              <button class="form-button" mat-button mat-raised-button color="accent" (click)="page2 ? true : false">Edit Fixtures</button>
+            </div>
+          </form> 
+        </mat-card-content>
+      </mat-card>
+    }
+    @if (page2) {    
+      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+        <mat-card-subtitle class="subtitle">Match Fixtures </mat-card-subtitle>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="S/N">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{dataSource.indexOf(element)+1}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="TEAM A">
+                <th mat-header-cell *matHeaderCellDef> TEAM A </th>
+                <td mat-cell *matCellDef="let element" [class]="element.class"> {{element.teamA}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="TEAM B">
+                <th mat-header-cell *matHeaderCellDef> TEAM B </th>
+                <td mat-cell *matCellDef="let element"> {{element.teamB}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+      
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="OPTION">
+                  <th mat-header-cell *matHeaderCellDef> OPTION </th>
+                  <td mat-cell *matCellDef="let element"> {{element.option}} </td>
+                  <td mat-footer-cell *matFooterCellDef> <b>TOTAL</b> </td>
+                </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="ODD">
+                <th mat-header-cell *matHeaderCellDef> ODD </th>
+                <td mat-cell *matCellDef="let element"> {{element.odd}} </td>
+                <td mat-footer-cell *matFooterCellDef> <b>{{getTotalOdds()}}</b> </td>
+              </ng-container>
+      
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="ACTION">
+                  <th mat-header-cell *matHeaderCellDef> Result </th>
+                  <td mat-cell *matCellDef="let element"> 
+                    <mat-slide-toggle class="example-margin" (ngModel)="element.result" (change)='getTicketResult()'></mat-slide-toggle> 
+                  </td>
+                  <td mat-footer-cell *matFooterCellDef>  </td>
+                </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="form-card mat-elevation-z8" style="width: 80%; margin: auto;">
+        <mat-card-title class="title">Edit Ticket Form</mat-card-title>
+        <mat-card-subtitle class="subtitle">Match Fixtures Buildup</mat-card-subtitle>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+          <form class="example-form" #fixturesForm="ngForm" (ngSubmit)="saveMatch(fixturesForm)">
+            <mat-form-field class="form-group">
+                <mat-label>Select League</mat-label>
+                <mat-select color="primary" >
+                  <!-- @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  } -->
+                  <mat-option value="Premier League">Premier League</mat-option>
+                  <mat-option value="Serial A">Serial A</mat-option>
+                  <mat-option value="La Liga">La Liga</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Select TEAM A</mat-label>
+                <mat-select color="primary" name="teamA" ngModel required >
+                    <mat-option>
+                        <ngx-mat-select-search></ngx-mat-select-search>
+                    </mat-option>
+                  <!-- @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  } -->
+                  <mat-option value="Arsenal">Arsenal</mat-option>
+                  <mat-option value="Inter Millan">Inter Millan</mat-option>
+                  <mat-option value="barcelona">barcelona</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div style="display: block; text-align: center; color: rgb(72, 143, 1); padding-bottom: 10px;"><span>VS</span></div>
+            <mat-form-field class="form-group">
+                <mat-label>Select League</mat-label>
+                <mat-select color="primary">
+                  <!-- @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  } -->
+                  <mat-option value="Premier League">Premier League</mat-option>
+                  <mat-option value="Serial A">Serial A</mat-option>
+                  <mat-option value="La Liga">La Liga</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+                <mat-label>Select TEAM B</mat-label>
+                <mat-select color="primary" name="teamB" ngModel required>
+                  <!-- @for (food of foods; track food) {
+                    <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
+                  } -->
+                  <mat-option value="Arsenal">Arsenal</mat-option>
+                  <mat-option value="Inter Millan">Inter Millan</mat-option>
+                  <mat-option value="barcelona">barcelona</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Option</mat-label>
+              <input matInput type="text" class="example-right-align" placeholder="" name="option" ngModel required/>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Odd</mat-label>
+              <input matInput type="number" class="example-right-align" placeholder="0" name="odd" ngModel required/>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Match Time</mat-label>
+              <input matInput [ngxMatDatetimePicker]="startTime" placeholder="Choose a date"  name="time" ngModel required>
+              <ngx-mat-datepicker-toggle matSuffix [for]="startTime"></ngx-mat-datepicker-toggle>
+              <ngx-mat-datetime-picker #startTime ></ngx-mat-datetime-picker>
+            </mat-form-field>
+            <mat-form-field class="form-group">
+              <mat-label>Select Tournament</mat-label>
+              <mat-select color="primary">
                 <!-- @for (food of foods; track food) {
                   <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
                 } -->
-                <mat-option value="Arsenal">Arsenal</mat-option>
-                <mat-option value="Inter Millan">Inter Millan</mat-option>
-                <mat-option value="barcelona">barcelona</mat-option>
+                <mat-option value="Premier League">Premier League</mat-option>
+                <mat-option value="Serial A">Serial A</mat-option>
+                <mat-option value="La Liga">La Liga</mat-option>
               </mat-select>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-            <mat-label>Option</mat-label>
-            <input matInput type="text" class="example-right-align" placeholder="" name="option" ngModel required/>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-            <mat-label>Odd</mat-label>
-            <input matInput type="number" class="example-right-align" placeholder="0" name="odd" ngModel required/>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-            <mat-label>Match Time</mat-label>
-            <input matInput [ngxMatDatetimePicker]="startTime" placeholder="Choose a date"  name="time" ngModel required>
-            <ngx-mat-datepicker-toggle matSuffix [for]="startTime"></ngx-mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #startTime ></ngx-mat-datetime-picker>
-          </mat-form-field>
-          <mat-form-field class="form-group">
-            <mat-label>Select Tournament</mat-label>
-            <mat-select color="primary">
-              <!-- @for (food of foods; track food) {
-                <mat-option [value]="food.value">{{food.viewValue}}</mat-option>
-              } -->
-              <mat-option value="Premier League">Premier League</mat-option>
-              <mat-option value="Serial A">Serial A</mat-option>
-              <mat-option value="La Liga">La Liga</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="button-div">
-            <button class="form-button" mat-button type="submit" mat-raised-button color="primary">Save</button>
-            <span class="example-spacer"></span>
-            <button class="form-button" mat-button mat-raised-button color="primary" (click)="saveTicket()">Submit Fixtures</button>
-          </div>
-            
-        </form>
-      </mat-card-content>
-    </mat-card>
-  }
-</div>
+            </mat-form-field>
+            <div class="button-div">
+              <button class="form-button" mat-button type="submit" mat-raised-button color="primary">Save</button>
+              <span class="example-spacer"></span>
+              <button class="form-button" mat-button mat-raised-button color="primary" (click)="updateTicket()">Submit Fixtures</button>
+            </div>
+              
+          </form>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}
 <!-- <mat-form-field>
     <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
        [min]="minDate" [max]="maxDate" [disabled]="disabled">
