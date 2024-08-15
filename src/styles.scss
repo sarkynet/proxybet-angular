@@ -74,8 +74,8 @@ a{
 //   }
 .flex{
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .example-card {
@@ -91,6 +91,9 @@ a{
   width: 200px;
   
   // background-color: teal;
+}
+.mtop{
+  margin-top: 15px;
 }
 
 .card-header{
@@ -197,6 +200,13 @@ table{
 .hint{
   font-size: small;
   color: #ff5507;
+}
+
+.closeBtn{
+  color: red;
+  font-size:large;
+  cursor: pointer;
+  padding: 2px 10px;
 }
 
   .mat-datepicker-content, .time-container {

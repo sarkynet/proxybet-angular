@@ -5,21 +5,21 @@
         <mat-card-title class="title">Create Wallet Form</mat-card-title>
         <hr style="width: 90%;" color="grey"/>
         <mat-card-content>
-            <form class="example-form">
+            <form class="example-form" #walletForm="ngForm" (ngSubmit)="createWallet(walletForm)">
                 <mat-form-field class="form-field">
                     <mat-label>Name</mat-label>
-                    <input matInput type="text" class="example-input" placeholder=""  maxlength="10"/>
+                    <input matInput type="text" class="example-input" name="name" ngModel placeholder=""  maxlength="10" required/>
                     <mat-hint align="end" class="hint">Not more than 10 letters</mat-hint>
                   </mat-form-field>
                 <mat-form-field class="form-field">
                     <mat-label>Amount</mat-label>
-                    <input matInput type="number" class="example-input" placeholder="0" maxlength="150,000"/>
+                    <input matInput type="number" class="example-input" placeholder="0" name="amount" ngModel maxlength="150,000" required/>
                     <span matTextPrefix>$&nbsp;</span>
                     <span matTextSuffix>.00</span>
                     <mat-hint class="hint" align="end">Amount within main wallet range</mat-hint>
                   </mat-form-field>
                   <div class="button-div">
-                    <button class="form-button" mat-button type="submit" mat-raised-button color="primary">Submit</button>
+                    <button class="form-button" mat-button type="submit" mat-raised-button color="primary" [disabled]="walletForm.invalid">Submit</button>
                   </div>
                 
             </form>
@@ -33,35 +33,51 @@
                 <mat-icon>add</mat-icon> Create Wallet
             </button>
         </div>
-        <div class="flex">
-            <mat-card class="example-card2 mat-elevation-z8" style="background-color: #7cc925; color: white;">
+        <div class="flex" style="flex-wrap: wrap;">
+          @for (wallet of wallets; track $index) {
+            <mat-card class="example-card2 mat-elevation-z8 mtop" [ngClass]="{'active' : wallet.status, 'inactive': !wallet.status}" style="min-width: 150px;">
+              <div style="display: flex; justify-content: end;">
+                @if (wallet.name == "Main" || wallet.name == "Bonus" || wallet.name == 'Coins') {
+                  <span mat-raised-button class="closeBtn" style="display: block; color: wheat;">-</span>
+                }
+                @else {
+                  <span mat-raised-button class="closeBtn" style="display: block;"(click)="deleteWallet(wallet._id)">x</span>
+                }
+              </div>  
                 <mat-card-header class="card-header">
-                    <mat-card-title class="card-title">50,000</mat-card-title>
+                    <mat-card-title class="card-title flex">
+                      <span>{{wallet.amount}}</span>
+                    </mat-card-title>
                     <hr style="width: 95%;"/>
                 </mat-card-header>
-                <mat-card-content class="card-subtitle" style="color: white;">Main Wallet</mat-card-content>
+                <mat-card-content class="card-subtitle" style="color: white; display: block;">
+                  <div><span>{{wallet.name}}</span></div>
+                  <button mat-raised-button color="primary"><a routerLink="{{wallet._id}}/edit" style="color: wheat;">Fund</a></button>
+                </mat-card-content>
             </mat-card>
-            <mat-card class="example-card mat-elevation-z8" style="background-color: #243347; color: white;">
-                <mat-card-header class="card-header">
-                    <mat-card-title class="card-title">35,000</mat-card-title>
-                    <hr style="width: 95%;"/>
-                </mat-card-header>
-                <mat-card-content class="card-subtitle" style="color: white;">Primary Wallet</mat-card-content>
-            </mat-card>
-            <mat-card class="example-card mat-elevation-z8" color="accent" style="background-color: #243347; color: white;">
-                <mat-card-header class="card-header">
-                    <mat-card-title class="card-title">15,000</mat-card-title>
-                    <hr style="width: 95%;"/>
-                </mat-card-header>
-                <mat-card-content class="card-subtitle" style="color: white;">Secondary Wallet</mat-card-content>
-            </mat-card>
-            <mat-card class="example-card2 mat-elevation-z8" color="accent" style="background-color: #ff9c07; color: white;">
-                <mat-card-header class="card-header">
-                    <mat-card-title class="card-title">100,000</mat-card-title>
-                    <hr style="width: 95%;"/>
-                </mat-card-header>
-                <mat-card-content class="card-subtitle" style="color: white;">Coins Wallet</mat-card-content>
-            </mat-card>
+          }
         </div>
     }
+}
+@if (walletId) {
+  <div class="bet-container">
+      <mat-card class="form-card mat-elevation-z8">
+        <mat-card-title class="title">Fund Wallet Form</mat-card-title>
+        <hr style="width: 90%;" color="grey"/>
+        <mat-card-content>
+            <form class="example-form" #FundwalletForm="ngForm" (ngSubmit)="fundWallet(FundwalletForm)">
+                <mat-form-field class="form-field">
+                    <mat-label>Amount</mat-label>
+                    <input matInput type="number" class="example-input" placeholder="0" name="amount" ngModel maxlength="150,000" required/>
+                    <span matTextPrefix>$&nbsp;</span>
+                    <span matTextSuffix>.00</span>
+                    <mat-hint class="hint" align="end">Amount within main wallet range</mat-hint>
+                </mat-form-field>
+                <div class="button-div">
+                <button class="form-button" mat-button type="submit" mat-raised-button color="primary" [disabled]="FundwalletForm.invalid">Submit</button>
+                </div>
+            </form>
+    </mat-card-content>
+    </mat-card>
+  </div>
 }

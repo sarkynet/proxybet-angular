@@ -37,8 +37,8 @@ const routes: Routes = [
       path: 'create',
       component: WalletComponent
     }, {
-      path: 'view',
-      component: ViewTicketComponent
+      path: ':_id/edit',
+      component: WalletComponent
     }]
   },
   {path: "payments", 

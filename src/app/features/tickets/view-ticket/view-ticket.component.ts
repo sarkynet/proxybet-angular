@@ -2,7 +2,6 @@ import { Component, inject, Input } from '@angular/core';
 import { MatDialog, matDialogAnimations } from '@angular/material/dialog';
 import { TicketService } from '../../../services/ticket.service';
 import { Ticket, Fixture } from "../../tickets/create-ticket/ticket-interface";
-import { type } from 'node:os';
 
 export interface PeriodicElement {
   name: string;
