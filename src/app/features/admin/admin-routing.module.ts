@@ -1,16 +1,15 @@
 import { ErrorHandler, NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './features/home/home.component';
-import { ViewTicketComponent } from './features/tickets/view-ticket/view-ticket.component';
-import { ListTicketsComponent } from './features/tickets/list-tickets/list-tickets.component';
-import { BetsComponent } from './features/bets/bets.component';
-import { WalletComponent } from './features/wallet/wallet.component';
-import { WalletDialogComponent } from './features/wallet/wallet-dialog/wallet-dialog.component';
-import { PaymentsComponent } from './features/payments/payments.component';
-import { FundComponent } from './features/payments/fund/fund.component';
-import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
-import { CoinsComponent } from './features/payments/coins/coins.component';
-import { CreateTicketComponent } from './features/tickets/create-ticket/create-ticket.component';
+import { HomeComponent } from '../home/home.component';
+import { ViewTicketComponent } from '../tickets/view-ticket/view-ticket.component';
+import { ListTicketsComponent } from '../tickets/list-tickets/list-tickets.component';
+import { BetsComponent } from '../bets/bets.component';
+import { WalletComponent } from '../wallet/wallet.component';
+import { PaymentsComponent } from '../payments/payments.component';
+import { FundComponent } from '../payments/fund/fund.component';
+import { WithdrawComponent } from '../payments/withdraw/withdraw.component';
+import { CoinsComponent } from '../payments/coins/coins.component';
+import { CreateTicketComponent } from '../tickets/create-ticket/create-ticket.component';
 
 const routes: Routes = [
   {path: "", component: HomeComponent},
@@ -24,6 +23,9 @@ const routes: Routes = [
     }, {
       path: 'view/:_id',
       component: ViewTicketComponent
+    }, {
+      path: 'create',
+      component: CreateTicketComponent
     }]
   },
   {path: "my-bets", component: BetsComponent},
@@ -81,13 +83,12 @@ const routes: Routes = [
     //     ));
     //     return `not-found`;
     //   }
-    // }//,
-        loadChildren: () => import('./features/admin/admin-routing.module').then(m => m.AdminModule)
-  }
+    // },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AdminModule { }

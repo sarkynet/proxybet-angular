@@ -26,7 +26,7 @@ import { CoinsComponent } from './features/payments/coins/coins.component';
 import { EditProfileComponent } from './features/user/edit-profile/edit-profile.component';
 import { NgxMatDateAdapter, NgxMatNativeDateAdapter } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
-// momentdate
+import { AdminModule } from './features/admin/admin-routing.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +52,7 @@ import { MAT_DATE_LOCALE, NativeDateAdapter, provideNativeDateAdapter } from '@a
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AdminModule,
     MaterialsModule,
     FormsModule,
     ReactiveFormsModule 
