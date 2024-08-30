@@ -43,7 +43,7 @@ export const navItems: NavItem[] = [
   },
 
   {
-    parent: 'VIrtual Games',
+    parent: 'Virtual Games',
     expanded:false,
     iconName: 'play',
     children: [{
@@ -61,19 +61,19 @@ export const navItems: NavItem[] = [
   },
   
   {
-    parent: 'Auth',
+    parent: 'Accounts',
     expanded:false,
     iconName: 'person',
     children: [{
-      displayName: 'Login',
+      displayName: 'Profile',
       iconName: 'lock',
-      route: '/authentication/login',
+      route: '/user/profile',
       disabled: true
     },
     {
-      displayName: 'Register',
+      displayName: 'LogOut',
       iconName: 'user-plus',
-      route: '/authentication/register',
+      route: '/user/profile',
       disabled: true
     }]
   }

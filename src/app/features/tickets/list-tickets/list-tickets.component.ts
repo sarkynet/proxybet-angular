@@ -5,28 +5,28 @@ import { ViewTicketComponent } from '../view-ticket/view-ticket.component';
 import { TicketService } from '../../../services/ticket.service';
 import { Fixture, Ticket } from '../create-ticket/ticket-interface';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  class: string;
-  odd: string;
-  disabled: boolean;
-}
+// export interface PeriodicElement {
+//   name: string;
+//   position: number;
+//   weight: number;
+//   symbol: string;
+//   class: string;
+//   odd: string;
+//   disabled: boolean;
+// }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'pending', weight: 1.0079, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 2, name: 'active', weight: 4.0026, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 3, name: 'active', weight: 6.941, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 4, name: 'closed', weight: 9.0122, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 5, name: 'pending', weight: 10.811, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 6, name: 'pending', weight: 12.0107, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 7, name: 'closed', weight: 14.0067, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 8, name: 'active', weight: 15.9994, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 9, name: 'closed', weight: 18.9984, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-  {position: 10, name: 'active', weight: 20.1797, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {position: 1, name: 'pending', weight: 1.0079, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 2, name: 'active', weight: 4.0026, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 3, name: 'active', weight: 6.941, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 4, name: 'closed', weight: 9.0122, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 5, name: 'pending', weight: 10.811, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 6, name: 'pending', weight: 12.0107, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 7, name: 'closed', weight: 14.0067, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 8, name: 'active', weight: 15.9994, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 9, name: 'closed', weight: 18.9984, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+//   {position: 10, name: 'active', weight: 20.1797, symbol: '25/09/24', odd:'This is the Discription of the Ticket', class:'', disabled: false},
+// ];
 // const dialog = inject(MatDialog);
 
 @Component({
@@ -53,9 +53,12 @@ export class ListTicketsComponent {
   }
 
   getTotalOdds(element:Fixture[]) {
-    let total:number = element.reduce((accum,item) => accum + item.odd, 0);
-    
-    return total;
+    let total:number = 1;
+    // total = element.reduce((accum,item)=> accum * item.odd, 0)
+    for (let index = 0; index < element.length; index++) {
+        total *= element[index].odd
+      }
+    return this.ticketService.approximate(total, 2) ; 
   }
 
   statusClass (){

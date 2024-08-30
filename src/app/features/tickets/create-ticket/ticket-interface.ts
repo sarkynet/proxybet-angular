@@ -15,7 +15,7 @@ export interface Ticket {
     disabled: boolean,
     limit: number,
     closeTime: string,
-    closeDate: string,
+    closeDate: any,
     fixtures: Fixture[] ,
     totalOdds: number,
     status: string,
