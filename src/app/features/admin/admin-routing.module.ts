@@ -12,14 +12,15 @@ import { CoinsComponent } from '../payments/coins/coins.component';
 import { CreateTicketComponent } from '../tickets/create-ticket/create-ticket.component';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent},
-  {path: "tickets", 
+  {
+    path: "", 
+    component: HomeComponent
+  },
+  {
+    path: "tickets", 
     children: [{
       path: '',
       component: ListTicketsComponent
-    }, {
-      path: ':_id/stake',
-      component: BetsComponent
     }, {
       path: 'view/:_id',
       component: ViewTicketComponent
@@ -28,8 +29,12 @@ const routes: Routes = [
       component: CreateTicketComponent
     }]
   },
-  {path: "my-bets", component: BetsComponent},
-  {path: "wallets", 
+  {
+    path: "my-bets", 
+    component: BetsComponent
+  },
+  {
+    path: "wallets", 
     children: [{
       path: '',
       component: WalletComponent
@@ -41,7 +46,8 @@ const routes: Routes = [
       component: WalletComponent
     }]
   },
-  {path: "payments", 
+  {
+    path: "payments", 
     children: [{
       path: '',
       component: PaymentsComponent
@@ -56,7 +62,8 @@ const routes: Routes = [
       component: CoinsComponent
     }]
   },
-  {path: "user", 
+  {
+    path: "user", 
     children: [{
       path: ':_id/profile',
       component: FundComponent
@@ -67,28 +74,11 @@ const routes: Routes = [
       path: 'coins',
       component: CoinsComponent
     }]
-  },
-  {
-    path: 'admin',
-    // redirectTo: ({ queryParams }) => {
-    //   const errorHandler = inject(ErrorHandler);
-    //   const adminParam = queryParams['admin'];
-    //   if (adminParam === 'true') {
-    //     return `admin`;
-    //   } else if (adminParam === 'false') {
-    //     return ``;
-    //   } else {
-    //     errorHandler.handleError(new Error(
-    //       'Attempted navigation to dashboard without specifying user status.'
-    //     ));
-    //     return `not-found`;
-    //   }
-    // },
-  },
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AdminModule { }

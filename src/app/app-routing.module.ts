@@ -1,5 +1,5 @@
 import { ErrorHandler, NgModule, inject } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivateFn } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { ViewTicketComponent } from './features/tickets/view-ticket/view-ticket.component';
 import { ListTicketsComponent } from './features/tickets/list-tickets/list-tickets.component';
@@ -10,11 +10,16 @@ import { PaymentsComponent } from './features/payments/payments.component';
 import { FundComponent } from './features/payments/fund/fund.component';
 import { WithdrawComponent } from './features/payments/withdraw/withdraw.component';
 import { CoinsComponent } from './features/payments/coins/coins.component';
-import { CreateTicketComponent } from './features/tickets/create-ticket/create-ticket.component';
+import { LoginComponent } from './features/auth/login/login.component';
+import { AuthGuardService } from './features/auth/auth-guard.service';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent},
-  {path: "tickets", 
+  {
+    path: "", 
+    component: HomeComponent
+  },
+  {
+    path: "tickets", 
     children: [{
       path: '',
       component: ListTicketsComponent
@@ -24,10 +29,18 @@ const routes: Routes = [
     }, {
       path: 'view/:_id',
       component: ViewTicketComponent
-    }]
+    }]//,
+    // canActivate: [AuthGuardService],
+    // canActivateChild: [AuthGuardService]
   },
-  {path: "my-bets", component: BetsComponent},
-  {path: "wallets", 
+  {
+    path: "my-bets", 
+    component: BetsComponent,
+    canActivate: [AuthGuardService],
+    canActivateChild: [AuthGuardService]
+  },
+  {
+    path: "wallets", 
     children: [{
       path: '',
       component: WalletComponent
@@ -37,9 +50,12 @@ const routes: Routes = [
     }, {
       path: ':_id/edit',
       component: WalletComponent
-    }]
+    }]//,
+    // canActivate: [AuthGuardService],
+    // canActivateChild: [AuthGuardService]
   },
-  {path: "payments", 
+  {
+    path: "payments", 
     children: [{
       path: '',
       component: PaymentsComponent
@@ -52,9 +68,12 @@ const routes: Routes = [
     }, {
       path: 'coins',
       component: CoinsComponent
-    }]
+    }]//,
+    // canActivate: [AuthGuardService],
+    // canActivateChild: [AuthGuardService]
   },
-  {path: "user", 
+  {
+    path: "user", 
     children: [{
       path: ':_id/profile',
       component: FundComponent
@@ -64,10 +83,23 @@ const routes: Routes = [
     }, {
       path: 'coins',
       component: CoinsComponent
+    }]//,
+    // canActivate: [AuthGuardService],
+    // canActivateChild: [AuthGuardService]
+  },
+  {
+    path: 'auth',
+    children: [{
+      path: 'login',
+      component: LoginComponent
     }]
   },
   {
     path: 'admin',
+    loadChildren:() => import('./features/admin/admin-routing.module').then(m => m.AdminModule),
+    canActivate: [AuthGuardService],
+    canActivateChild: [AuthGuardService]
+  }
     // redirectTo: ({ queryParams }) => {
     //   const errorHandler = inject(ErrorHandler);
     //   const adminParam = queryParams['admin'];
@@ -82,8 +114,7 @@ const routes: Routes = [
     //     return `not-found`;
     //   }
     // }//,
-        loadChildren: () => import('./features/admin/admin-routing.module').then(m => m.AdminModule)
-  }
+    
 ];
 
 @NgModule({

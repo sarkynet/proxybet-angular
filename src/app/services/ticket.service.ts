@@ -97,7 +97,7 @@ export class TicketService {
 
       else if (element > 4) {
         decimal.splice(index, 1)
-        decimal[index-1] = eval(decimal[index-1]) +1
+        decimal[index-1] = ''+Number(decimal[index-1]) +1
       }
       else
         decimal.splice(index, 1)
