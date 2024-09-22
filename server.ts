@@ -16,33 +16,55 @@ export function app(): express.Express {
 
   //Configure mongoDB for the Application
 
-const mongoose = require('mongoose');
-const uri = "mongodb+srv://sarkynetengineering:<db_password>@cluster0.vmwsq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  const mongoose = require('mongoose');
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://sarkynetengineering:wisdomofgod@cluster0.vmwsq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+  const uri = "mongodb://localhost:27017"
+// const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+  mongoose.Promise = global.Promise;
+  mongoose.set("strictQuery", false);
+  mongoose.connect(uri, {
+    useNewUrlParser: true,
+    //useFindAndModify: false,
+    useUnifiedTopology: true
+  }).then(()=>{
+    console.log("Database Connected Successfully...!");
+  },
+  (error:any)=>{
+    console.log("Database Connection Error:" + error);
+  });
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true,
+//   }
+// });
+// async function connectDB() {
+//   try {
+//     // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+//     await mongoose.connect(uri, clientOptions);
+//     await mongoose.connection.db.admin().command({ ping: 1 });
+//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//   } finally {
+//     // Ensures that the client will close when you finish/error
+//     await mongoose.disconnect();
+//   }
 
-async function run() {
-  try {
-    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-    await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
-  }
-}
-run().catch(console.dir);
+// }
+// connectDB().catch(console.dir);
 
-
-  server.set('view engine', 'html');
-  server.set('views', browserDistFolder);
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }))
 
   // Example Express Rest API endpoints
-  server.use('/api', routes)
+  server.use('/api', routes);
+  
   server.get('/api/**', (req, res) => { 
     res.status(404).send('Data requests are not Supported');
   });
+
   // Serve static files from /browser
   server.get('**', express.static(browserDistFolder, {
     maxAge: '1y',
@@ -79,3 +101,5 @@ function run(): void {
 }
 
 run();
+
+export default AppServerModule;

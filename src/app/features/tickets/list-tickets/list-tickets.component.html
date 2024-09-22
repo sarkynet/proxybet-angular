@@ -28,6 +28,10 @@
         <mat-card-content class="card-subtitle" style="color: white;">Closed Tickets</mat-card-content>
     </mat-card>
 </div>
+<div class="flex justify-content-between">
+  <a mat-raised-button color="accent" routerLink="/admin/tickets/createOne"><mat-icon>list</mat-icon> Create Single Ticket</a>
+  <a mat-raised-button color="accent" routerLink="/admin/tickets/createMultiple"><mat-icon>list</mat-icon> Create Multiple Ticket</a>
+</div>
 <div class="flex " style="margin-top: 20px;">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatDialog, matDialogAnimations } from '@angular/material/dialog';
 import { TicketService } from '../../../services/ticket.service';
-import { Ticket, Fixture } from "../../tickets/create-ticket/ticket-interface";
+import { Ticket, Fixture } from "../ticket-interface";
 
 export interface PeriodicElement {
   name: string;
@@ -45,19 +45,19 @@ new: any;
   ) {}
 
   ngOnInit(){
-    if (this.ticketId) {
-      this.tickets = this.ticketService.getTickets()
-      for (let index = 0; index < this.tickets.length; index++) {
-        const element = this.tickets[index];
-        if (element._id == this.ticketId) {
-          this.ticket = element
-          this.fixtures = element.fixtures
-          this.setGameStatus(this.fixtures)
-          this.dataSource = this.fixtures;
-          console.log(this.fixtures);
-        }
-      }
-    }
+    // if (this.ticketId) {
+    //   this.tickets = this.ticketService.getTickets()
+    //   for (let index = 0; index < this.tickets.length; index++) {
+    //     const element = this.tickets[index];
+    //     if (element._id == this.ticketId) {
+    //       this.ticket = element
+    //       this.fixtures = element.fixtures
+    //       this.setGameStatus(this.fixtures)
+    //       this.dataSource = this.fixtures;
+    //       console.log(this.fixtures);
+    //     }
+    //   }
+    // }
   }
 
   getTotalOdds() {

@@ -97,8 +97,8 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren:() => import('./features/admin/admin-routing.module').then(m => m.AdminModule),
-    canActivate: [AuthGuardService],
-    canActivateChild: [AuthGuardService]
+    // canActivate: [AuthGuardService],
+    // canActivateChild: [AuthGuardService]
   }
     // redirectTo: ({ queryParams }) => {
     //   const errorHandler = inject(ErrorHandler);

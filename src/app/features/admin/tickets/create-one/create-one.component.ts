@@ -1,18 +1,17 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Fixture, Ticket } from './ticket-interface'
+import { Fixture, Ticket } from '../../../tickets/ticket-interface';
 import { MatTable } from '@angular/material/table';
-import { TicketService } from '../../../services/ticket.service';
+import { TicketService } from '../../../../services/ticket.service';
 import { Router } from '@angular/router';
-import { Leagues } from '../../../data/leagues';
+import { Leagues } from '../../../../data/leagues';
 
 @Component({
-  selector: 'app-create-ticket',
-  templateUrl: './create-ticket.component.html',
-  styleUrl: './create-ticket.component.scss'
+  selector: 'app-create-one',
+  templateUrl: './create-one.component.html',
+  styleUrl: './create-one.component.scss'
 })
-
-export class CreateTicketComponent {
+export class CreateOneComponent {
   @ViewChild(MatTable) table!:MatTable<any>
   readonly date = new FormControl(new Date());
   readonly serializedDate = new FormControl(new Date().toISOString());
@@ -43,20 +42,15 @@ export class CreateTicketComponent {
 
   ngOnInit(){
     if (this.ticketId) {
-      this.tickets = this.ticketService.getTickets()
-      for (let index = 0; index < this.tickets.length; index++) {
-        const element = this.tickets[index];
-        if (element._id == this.ticketId) {
-          this.ticket = element
-          this.ticket.closeDate = new Date(this.ticket.closeDate)
-          this.fixtures = element.fixtures
-          this.dataSource = this.fixtures;
-          console.log(this.ticket);
-        }
-      }
+      this.ticketService.getTicket(this.ticketId).subscribe((data)=>{
+        console.log(data);
+        this.ticket = data.ticket;
+        this.fixtures = data.ticket.fixtures;
+        this.setTicketStatus(this.ticket)
+        this.getTicketResult()
+      })
     }
-    this.setTicketStatus(this.ticket)
-    this.getTicketResult()
+    
   }
 
   saveInfo(ticketData:any){
@@ -104,7 +98,6 @@ export class CreateTicketComponent {
         break;
       }
     }
-    
   }
 
   updateMatch (element:any) {
@@ -170,7 +163,6 @@ export class CreateTicketComponent {
   }
 
   getTicketResult(){
-    let result:boolean = false;
     for (let index = 0; index < this.fixtures.length; index++) {
       const element = this.fixtures[index];
       if (!element.result)
@@ -178,15 +170,15 @@ export class CreateTicketComponent {
 
     }
   }
-  
 
   saveTicket() {
     this.ticket.fixtures = this.fixtures;
-    this.ticket._id = this.uniqueRef();
+    // this.ticket._id = this.uniqueRef();
     console.log(this.ticket);
     this.page2 = false;
-    this.ticketService.save(this.ticket);
-    this.router.navigate(['tickets']);
+    this.ticketService.save(this.ticket).subscribe((data)=>{
+      this.router.navigate(['tickets']);
+    });
   }
 
   updateTicket() {

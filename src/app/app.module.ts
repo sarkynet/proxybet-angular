@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialsModule } from './materials/materials.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './features/home/home.component';
-import { CreateTicketComponent } from './features/tickets/create-ticket/create-ticket.component';
 import { ListTicketsComponent } from './features/tickets/list-tickets/list-tickets.component';
 import { ViewTicketComponent } from './features/tickets/view-ticket/view-ticket.component';
 import { SignupComponent } from './features/auth/signup/signup.component';
@@ -27,13 +27,14 @@ import { EditProfileComponent } from './features/user/edit-profile/edit-profile.
 import { NgxMatDateAdapter, NgxMatNativeDateAdapter } from '@angular-material-components/datetime-picker';
 import { MAT_DATE_LOCALE, NativeDateAdapter, provideNativeDateAdapter } from '@angular/material/core';
 import { AdminModule } from './features/admin/admin-routing.module';
+import { CreateOneComponent } from './features/admin/tickets/create-one/create-one.component';
+import { CreateMultipleComponent } from './features/admin/tickets/create-multiple/create-multiple.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     HomeComponent,
-    CreateTicketComponent,
     ListTicketsComponent,
     ViewTicketComponent,
     SignupComponent,
@@ -48,6 +49,8 @@ import { AdminModule } from './features/admin/admin-routing.module';
     WithdrawComponent,
     CoinsComponent,
     EditProfileComponent,
+    CreateOneComponent,
+    CreateMultipleComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,8 +63,9 @@ import { AdminModule } from './features/admin/admin-routing.module';
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    provideNativeDateAdapter()
+    // {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    provideNativeDateAdapter(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

@@ -69,9 +69,14 @@ a{
   color: #fff;
 }
 /******  TICKETS STYLES  *******/
-// p {
-//     font-family: Lato;
-//   }
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
 .flex{
   display: flex;
   justify-content: space-around;

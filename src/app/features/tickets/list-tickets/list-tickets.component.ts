@@ -1,9 +1,8 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { MatDialog, matDialogAnimations } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { ViewTicketComponent } from '../view-ticket/view-ticket.component';
 import { TicketService } from '../../../services/ticket.service';
-import { Fixture, Ticket } from '../create-ticket/ticket-interface';
+import { Fixture, Ticket } from '../ticket-interface';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -46,8 +45,11 @@ export class ListTicketsComponent {
     public ticketService: TicketService 
   ) {}
   ngOnInit(){
-    this.tickets = this.ticketService.getTickets();
+    this.ticketService.getTickets().subscribe(data => {
+      console.log();
+    });
     this.dataSource = this.tickets
+    // console.log(t);
     
     this.statusClass()
   }
@@ -62,24 +64,24 @@ export class ListTicketsComponent {
   }
 
   statusClass (){
-    for (let index = 0; index < this.tickets.length; index++) {
-      const element = this.tickets[index];
-      if (element.status == 'Active') {
-        element.class = "accent-text";
-      }else if (element.status == 'Pending') {
-        element.class = "warn-text";
-        // element.symbol = 'expired';
-        element.disabled = true;
-      }else if (element.status == 'Closed') {
-        element.class = "danger-text";
-        // element.symbol = 'expired';
-        element.disabled = true;
-      }
-      else if (element.status == 'In Progress') {
-        element.class = "primary-text";
-        element.disabled = true;
-      }
-    }
+    // for (let index = 0; index < this.tickets.length; index++) {
+    //   const element = this.tickets[index];
+    //   if (element.status == 'Active') {
+    //     element.class = "accent-text";
+    //   }else if (element.status == 'Pending') {
+    //     element.class = "warn-text";
+    //     // element.symbol = 'expired';
+    //     element.disabled = true;
+    //   }else if (element.status == 'Closed') {
+    //     element.class = "danger-text";
+    //     // element.symbol = 'expired';
+    //     element.disabled = true;
+    //   }
+    //   else if (element.status == 'In Progress') {
+    //     element.class = "primary-text";
+    //     element.disabled = true;
+    //   }
+    // }
   }
   
 }

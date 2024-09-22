@@ -9,7 +9,8 @@ import { PaymentsComponent } from '../payments/payments.component';
 import { FundComponent } from '../payments/fund/fund.component';
 import { WithdrawComponent } from '../payments/withdraw/withdraw.component';
 import { CoinsComponent } from '../payments/coins/coins.component';
-import { CreateTicketComponent } from '../tickets/create-ticket/create-ticket.component';
+import { CreateOneComponent } from './tickets/create-one/create-one.component';
+import { CreateMultipleComponent } from './tickets/create-multiple/create-multiple.component';
 
 const routes: Routes = [
   {
@@ -25,8 +26,11 @@ const routes: Routes = [
       path: 'view/:_id',
       component: ViewTicketComponent
     }, {
-      path: 'create',
-      component: CreateTicketComponent
+      path: 'createOne',
+      component: CreateOneComponent
+    }, {
+      path: 'createMultiple',
+      component: CreateMultipleComponent
     }]
   },
   {
